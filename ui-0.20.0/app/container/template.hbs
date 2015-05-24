@@ -1,0 +1,151 @@
+<aside>
+  <label>Container</label>
+  {{resource-actions-menu model=this choices=availableActions classNames="pull-right"}}
+  <h3 class="force-wrap">{{displayName}}</h3>
+
+  <hr/>
+
+  {{#if description}}
+    <label style="margin-top: 10px;">Description</label>
+    <p>{{description}}</p>
+    <hr/>
+  {{/if}}
+
+  <div class="clearfix">
+    <label>Info</label>
+  </div>
+
+  <ul class="list-circles">
+    <li>
+      <i {{bind-attr class=":fa-fw stateIcon"}}></i>
+      {{displayState}}
+      {{#if isTransitioning}}
+        <div class="progress progress-striped active" style="height: 10px; border: 0;">
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" {{bind-attr aria-valuenow=displayProgress style=progressStyle}}>
+            <span class="sr-only">{{displayProgress}}% Complete</span>
+          </div>
+        </div>
+      {{/if}}
+      {{#if showTransitioningMessage}}
+        <div class="force-wrap">
+          {{transitioningMessage}}
+        </div>
+      {{/if}}
+    </li>
+
+    <li>
+      <i class="fa-fw ss-link"></i>
+      {{displayIp}}
+    </li>
+  </ul>
+</aside>
+
+<section>
+  <div class="text-muted">{{imageUuid}} {{zero-clipboard text=imageUuid}}</div>
+
+  {{partial "stats-cpu-memory"}}
+
+  <div class="well">
+    <label>Ports</label>
+    <table class="grid fixed">
+      <thead>
+        <tr>
+          <th width="120">State</th>
+          <th>IP Address</th>
+          <th>Public (on Host)</th>
+          <th>Private (in Container)</th>
+          <th>Protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each port in ports itemController="port"}}
+          <tr>
+            <td>
+              <span {{bind-attr class=":badge :state port.stateBackground"}}>
+                {{port.displayState}}
+              </span>
+            </td>
+            <td>
+              {{port.displayPublicIp}}
+            </td>
+            <td>
+              {{port.publicPort}}
+            </td>
+            <td>
+              {{port.privatePort}}
+            </td>
+            <td>
+              {{upper-case port.protocol}}
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td colspan="5">
+              <div class="text-muted text-center">This container has no ports.</div>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="well">
+    <label>Volume Mounts</label>
+    <table class="grid fixed">
+      <thead>
+        <tr>
+          <th width="120">State</th>
+          <th>Mount Point</th>
+          <th>Volume</th>
+          <th width="80">Writable</th>
+          <th class="text-right">Shared With</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each mount in mounts itemController="mount"}}
+          <tr>
+            <td>
+              <span {{bind-attr class=":badge :state mount.stateBackground"}}>
+                {{mount.displayState}}
+              </span>
+            </td>
+            <td>
+              {{mount.path}}
+            </td>
+            <td>
+              <div class="force-wrap">
+                {{#with mount.volume as volume controller="volume"}}
+                  {{volume.displayName}}
+                {{/with}}
+              </div>
+            </td>
+            <td>
+              <i {{bind-attr class="mount.isReadWrite:ss-check:ss-delete mount.isReadWrite::text-muted"}}></i>
+            </td>
+            <td class="text-right">
+              <ul class="list-unstyled">
+              {{#each container in mount.volume.sharedWith itemController="container"}}
+                <li>
+                  {{#link-to "container" container.id}}{{container.displayName}}{{/link-to}}
+                </li>
+              {{else}}
+                <li class="text-muted">None</li>
+              {{/each}}
+              </ul>
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td colspan="5">
+              {{#if mountError}}
+                <div class="text-danger text-center">Error: {{mountError.message}}</div>
+              {{else}}
+                <div class="text-muted text-center">This container has no volumes.</div>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+.dot {
+  float: left;
+  margin: 2px;
+  font-size: 11px;
+}
+
+.instance-detail H1,
+.instance-detail H2,
+.instance-detail H3,
+.instance-detail H4,
+.instance-detail H5 {
+  margin: 0;
+}
+
+.console-body {
+  margin: 20px auto;
+  width: 540px;
+}
+
+.console-status {
+  position: absolute;
+  margin: 10px 0;
+}
+
+.machine-host {
+  min-height: 168px;
+
+  .machine-info {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+    white-space: normal;
+    color: #d2d7de;
+  }
+}
+
+.machine-driver {
+  &.digitalocean {
+    background-image: url('images/providers/digitalocean.svg');
+  }
+
+  &.amazon {
+    background-image: url('images/providers/amazon.svg');
+  }
+
+  &.openstack {
+    background-image: url('images/providers/openstack.svg');
+  }
+
+  &.packet {
+    background-image: url('images/providers/packet.svg');
+  }
+
+  &.custom {
+    background-image: url('images/providers/custom.svg');
+  }
+}

@@ -1,0 +1,20 @@
+<section class="horizontal-form container-fluid">
+  <h2>Add Container</h2>
+  {{top-errors errors=errors}}
+
+  {{partial "container/edit-name"}}
+
+  {{partial "form-divider"}}
+
+  {{partial "container/new-image"}}
+
+  {{partial "form-divider"}}
+
+  {{partial "container/edit-ports"}}
+</section>
+
+{{partial "form-divider"}}
+
+{{partial "container/new-advanced"}}
+
+{{partial "save-cancel"}}

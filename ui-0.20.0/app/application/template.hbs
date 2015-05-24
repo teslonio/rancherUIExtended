@@ -1,0 +1,13 @@
+<div id="underlay" class="underlay hide"></div>
+<div id="loading-underlay" class="underlay"></div>
+<div id="loading-overlay" class="loading-overlay">
+  <div class="loading-box">
+    <h3>Loading&hellip;</h3>
+  </div>
+</div>
+{{outlet "overlay"}}
+{{outlet "error"}}
+{{page-articles}}
+<div id="application">
+  {{outlet}}
+</div>

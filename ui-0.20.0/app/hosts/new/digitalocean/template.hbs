@@ -1,0 +1,96 @@
+{{top-errors errors=errors}}
+
+<section class="horizontal-form">
+  <div class="container-fluid">
+    {{partial "host/add-common"}}
+
+    <div class="over-hr" style="margin: 20px 0;">
+      <span>Account Access</span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label for="accessToken" class="form-control-static">Access Token*</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        {{input id="accessToken" type="text" value=digitaloceanConfig.accessToken classNames="form-control" placeholder="Your DigitalOcean API access token"}}
+        <p class="help-block">A Personal Access Token from the DigitalOcean <a href="https://cloud.digitalocean.com/settings/applications" target="_blank">Apps & API</a> screen</p>
+      </div>
+    </div>
+
+    <div class="over-hr" style="margin: 20px 0;">
+      <span>Instance</span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label for="image" class="form-control-static">Image</label>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        {{view "select"
+          class="form-control"
+          id="image"
+          content=imageChoices
+          value=digitaloceanConfig.image
+        }}
+      </div>
+      <div class="col-sm-12 col-md-2 form-label">
+        <label for="size" class="form-control-static">Size</label>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        {{view "select"
+          class="form-control"
+          id="size"
+          content=sizeChoices
+          value=digitaloceanConfig.size
+        }}
+      </div>
+    </div>
+
+    <div class="over-hr" style="margin: 20px 0;">
+      <span>Region</span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-sm-12 col-md-2 form-label">
+        <label for="region" class="form-control-static">Region</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        {{view "select"
+          class="form-control"
+          id="region"
+          content=regionChoices
+          optionValuePath="content.id"
+          optionLabelPath="content.name"
+          value=digitaloceanConfig.region
+        }}
+      </div>
+    </div>
+
+    <div class="over-hr" style="margin: 20px 0;">
+      <span>Options</span>
+    </div>
+
+    <table style="margin: 0 auto;">
+      <tr>
+        <td style="padding: 0 10px;">
+          <div class="form-label checkbox">
+            <label>{{input type="checkbox" checked=digitaloceanConfig.backups}} Enable Backups</label>
+          </div>
+        </td>
+        <td style="padding: 0 10px;">
+          <div class="form-label checkbox">
+            <label>{{input type="checkbox" checked=digitaloceanConfig.ipv6}} Enable IPv6</label>
+          </div>
+        </td>
+        <td style="padding: 0 10px;">
+          <div class="form-label checkbox">
+            <label>{{input type="checkbox" checked=digitaloceanConfig.privateNetworking}} Enable Private Networking</label>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  {{partial "save-cancel"}}
+</section>

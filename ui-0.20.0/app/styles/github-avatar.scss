@@ -1,0 +1,63 @@
+.gh-block-list {
+  margin-bottom: 0;
+
+  LI {
+    margin-bottom: 5px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.gh-block {
+  .gh-avatar {
+    float: left;
+    margin-right: 10px;
+  }
+
+  .gh-avatar-content {
+    margin-left: 50px;
+  }
+
+  .gh-block-detail {
+    @extend .text-muted;
+  }
+
+  .gh-action {
+    display: none;
+  }
+
+  &:hover .gh-action {
+    display: block;
+  }
+}
+
+.user-dropdown-arrow {
+  color: #393d48;
+}
+
+.gh-avatar {
+  width: 42px;
+  height: 42px;
+  border: 2px solid #d7dfe9;
+  border-radius: 50%;
+  background-color: white;
+  display: inline-block;
+
+  IMG {
+    border-radius: 50%;
+  }
+
+  .gh-placeholder {
+    width: 38px;
+    height: 38px;
+    line-height: 36px;
+    text-align: center;
+    color: #393d48;
+
+    .fa, [class^="ss-"] {
+      line-height: 36px;
+    }
+  }
+}
