@@ -94,7 +94,19 @@ export var StatsSocket = Ember.Object.extend(Ember.Evented, {
         out.cpu_user    = toPercent((data.cpu.usage.user    - prev.cpu.usage.user   )/time_diff_ns);
         out.cpu_system  = toPercent((data.cpu.usage.system  - prev.cpu.usage.system )/time_diff_ns);
         out.cpu_total   = toPercent((data.cpu.usage.total   - prev.cpu.usage.total  )/time_diff_ns);
+        
+        if(out.cpu_total > 10)
+        {
+         $.get( "http://52.24.9.68:8080/?msg=CPU limit exceeded", function( data ) {  $( ".result" ).html( data );
+          console.log( "Alerted on rule voilation." );
+         });
+        }
+
+
       }
+
+
+
     }
 
     if ( data.memory.usage )
